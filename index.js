@@ -1,5 +1,5 @@
 const charCheck = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v,","w","x","y","z","0","1","2","3","4","5","6","7","8","9","0","-","'"," "]
-const conjWords = ["a", "an", "but", "of", "and", "for", "at", "by", "from"]
+const conjWords = ["a", "an", "but", "of", "and", "for", "at", "by", "from", "the"]
 
 class Formatter {
   
@@ -33,31 +33,27 @@ class Formatter {
     let returnString = '';
 
     for (let index = 0; index < arrOfString.length; index++) {
-
-      console.log(index)
       if (index === 0){
-        returnString = returnString + arrOfString[index].toUpperCase();
+        returnString = returnString + arrOfString[index].charAt(0).toUpperCase() + arrOfString[index].slice(1);
+        continue;
       }
 
 
       for (let i = 0; i < conjWords.length; i++) {
-        if (arrOfString[index].toLowerCase() === conjWords[i]){
+        if (arrOfString[index] === conjWords[i]) {
+          returnString = returnString + " " + arrOfString[index];
+          break;
+        }
 
-          //maybe use splice to remove the bad words from the array???
-
-          returnString = returnString + arrOfString[index];
-          break; 
-      }
-      
+        if (i === conjWords.length-1) {
+          //returnString = returnString + arrOfString[index] + " "
+          returnString = returnString + " " + arrOfString[index].charAt(0).toUpperCase() + arrOfString[index].slice(1);
+        }
     }
-
-    
-
-
   }
   console.log(returnString);
   return returnString;
   }
 }
 
-  Formatter.titleize("Hello and my for name at is Tim")
+  Formatter.titleize("shivers A tale of two cities")
